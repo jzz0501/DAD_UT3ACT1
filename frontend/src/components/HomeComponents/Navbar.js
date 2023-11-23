@@ -15,18 +15,19 @@ export default function Navbar(props) {
             <Container maxWidth="x1">
                 <Toolbar>
                     <Grid container spacing={5}>
-                        <Grid item xs={2} alignItems='left'>
+                        <Grid item xs={2}>
                             <Typography variant="h6">{props.userRol==="admin"?<SupervisorAccountIcon/>:<PersonIcon/>}{props.username}</Typography>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={1.5}>
                             <Button>Inicio</Button>
                         </Grid>
-                        {props.userRol==="admin"&&<Grid item xs={2}>
+                        {props.userRol==="admin"&&<Grid item xs={1.5}>
                             <Button onClick={() => navigate('/informes')}>Informes</Button>
                         </Grid>}
-                        <Grid item xs={2}>
+                        <Grid item xs={1.5}>
                             <Button>Ayuda</Button>
                         </Grid>
+                        <Grid item xs={3.5} />
                         <Grid item xs={2}>
                             <Button variant="contained" onClick={() => {
                                 dispatch(loginActions.logout())
