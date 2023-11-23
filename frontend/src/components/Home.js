@@ -42,7 +42,7 @@ export default function Home() {
         <div>
             <Navbar username={userData.username} userRol={userData.userRol}/>
             <Formulario event={update} />
-            <Tabla list={list} updateEvent={update}/>
+            <Tabla list={list} updateEvent={update} userRol={userData.userRol}/>
         </div>
     )
 }
