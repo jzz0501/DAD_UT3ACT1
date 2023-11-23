@@ -3,9 +3,8 @@ import Navbar from "./HomeComponents/Navbar"
 import { useSelector } from "react-redux/es/hooks/useSelector"
 import { useState } from "react"
 import { useEffect } from "react"
-import MaterialTable from "@material-table/core";
 import { useNavigate } from "react-router-dom"
-import { ExportCsv, ExportPdf } from "@material-table/exporters";
+import InformesColeccion from "./InformesColeccion"
 
 export default function Informes() {
 
@@ -42,34 +41,7 @@ export default function Informes() {
             {
                 control
                 &&
-                <div>
-                    <MaterialTable
-                        data={data}
-                        columns={columns}
-                        options={{
-                            filtering: true,
-                            columnsButton: true,
-                            exportMenu: [
-                                {
-                                    label: "Export PDF",
-                                    exportFunc: (cols, datas) =>
-                                    ExportPdf(cols, datas, "myPdfFileName"),
-                                },
-                                {
-                                    label: "Export CSV",
-                                    exportFunc: (cols, datas) =>
-                                    ExportCsv(cols, datas, "myCsvFileName"),
-                                },
-                            ],
-                        }}
-                        renderSummaryRow={({column, data}) => 
-                            column.field === "precio"? {
-                                value: data.reduce((precio, row) => precio + row.precio, 0),
-                                style: {background: "red"}
-                            } : undefined
-                        }
-                    />
-                </div>
+                <InformesColeccion data={data} columns={columns}/>
             }
             <Button onClick={() => navigate('/home')}>Volver</Button>
         </div>
