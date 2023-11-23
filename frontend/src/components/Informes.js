@@ -1,4 +1,4 @@
-import { Button } from "@mui/material"
+import { Button, Grid } from "@mui/material"
 import Navbar from "./HomeComponents/Navbar"
 import { useSelector } from "react-redux/es/hooks/useSelector"
 import { useState } from "react"
@@ -36,14 +36,24 @@ export default function Informes() {
 
     return (
         <div>
-            <Navbar username={userData.username} userRol={userData.userRol}/>
-            <Button variant="contained" onClick={() => control?setControl(false):setControl(true)}>Informes Coleccion</Button>
-            {
-                control
-                &&
-                <InformesColeccion data={data} columns={columns}/>
-            }
-            <Button onClick={() => navigate('/home')}>Volver</Button>
+            <Grid container>
+                <Grid item xs={12}>
+                    <Navbar username={userData.username} userRol={userData.userRol}/>
+                </Grid>
+                <Grid item xs={12} style={{display: "flex", justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
+                    <Button variant="contained" onClick={() => control?setControl(false):setControl(true)}>Informes Coleccion</Button>
+                </Grid>
+                {
+                    control
+                    &&
+                    <Grid item xs={12} style={{justifyContent: 'center', marginTop: 10}}>
+                        <InformesColeccion data={data} columns={columns} />
+                    </Grid>
+                }
+                <Grid item xs={12} style={{display: "flex", justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
+                    <Button onClick={() => navigate('/home')}>Volver</Button>
+                </Grid>
+            </Grid>
         </div>
     )
 }

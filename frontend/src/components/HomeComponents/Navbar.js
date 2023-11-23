@@ -12,22 +12,22 @@ export default function Navbar(props) {
 
     return (
         <AppBar position="static">
-            <Container>
+            <Container maxWidth="x1">
                 <Toolbar>
-                    <Grid container>
-                        <Grid item xs={2} md={2} lg={2}>
+                    <Grid container spacing={5}>
+                        <Grid item xs={2} alignItems='left'>
                             <Typography variant="h6">{props.userRol==="admin"?<SupervisorAccountIcon/>:<PersonIcon/>}{props.username}</Typography>
                         </Grid>
-                        <Grid item xs={2} md={2} lg={2}>
+                        <Grid item xs={2}>
                             <Button>Inicio</Button>
                         </Grid>
-                        {props.userRol==="admin"&&<Grid item xs={2} md={2} lg={2}>
+                        {props.userRol==="admin"&&<Grid item xs={2}>
                             <Button onClick={() => navigate('/informes')}>Informes</Button>
                         </Grid>}
-                        <Grid item xs={2} md={2} lg={2}>
+                        <Grid item xs={2}>
                             <Button>Ayuda</Button>
                         </Grid>
-                        <Grid item xs={4} md={4} lg={4}>
+                        <Grid item xs={2}>
                             <Button variant="contained" onClick={() => {
                                 dispatch(loginActions.logout())
                             }}>Salir</Button>
