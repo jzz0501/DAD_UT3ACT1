@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material"
+import { Button, Grid, Tooltip } from "@mui/material"
 import Navbar from "./HomeComponents/Navbar"
 import { useSelector } from "react-redux/es/hooks/useSelector"
 import { useState } from "react"
@@ -41,7 +41,9 @@ export default function Informes() {
                     <Navbar username={userData.username} userRol={userData.userRol}/>
                 </Grid>
                 <Grid item xs={12} style={{display: "flex", justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
-                    <Button variant="contained" onClick={() => control?setControl(false):setControl(true)}>Informes Coleccion</Button>
+                    <Tooltip title="informes coleccion" arrow>
+                        <Button variant="contained" onClick={() => control?setControl(false):setControl(true)}>Informes Coleccion</Button>
+                    </Tooltip>
                 </Grid>
                 {
                     control
@@ -51,7 +53,9 @@ export default function Informes() {
                     </Grid>
                 }
                 <Grid item xs={12} style={{display: "flex", justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
-                    <Button onClick={() => navigate('/home')}>Volver</Button>
+                    <Tooltip title="volver" arrow>
+                        <Button onClick={() => navigate('/home')}>Volver</Button>
+                    </Tooltip>
                 </Grid>
             </Grid>
         </div>

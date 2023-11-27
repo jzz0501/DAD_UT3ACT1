@@ -1,9 +1,9 @@
-import { AppBar, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, Container, Grid, Toolbar, Tooltip, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { loginActions } from "../../store/storelogin";
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import PersonIcon from '@mui/icons-material/Person';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar(props) {
 
@@ -19,19 +19,33 @@ export default function Navbar(props) {
                             <Typography variant="h6">{props.userRol==="admin"?<SupervisorAccountIcon/>:<PersonIcon/>}{props.username}</Typography>
                         </Grid>
                         <Grid item xs={1.5}>
-                            <Button>Inicio</Button>
+                            <Tooltip title="inicio" arrow>
+                                <Button>Inicio</Button>
+                            </Tooltip>
                         </Grid>
-                        {props.userRol==="admin"&&<Grid item xs={1.5}>
-                            <Button onClick={() => navigate('/informes')}>Informes</Button>
-                        </Grid>}
+                        {
+                            props.userRol==="admin"
+                            &&
+                            <Grid item xs={1.5}>
+                                <Tooltip title="informes">
+                                    <Button onClick={() => navigate('/informes')}>Informes</Button>
+                                </Tooltip>
+                            </Grid>
+                        }
                         <Grid item xs={1.5}>
-                            <Button>Ayuda</Button>
+                            <Tooltip title="ayuda" arrow>
+                                <Button>
+                                    <Link to={'/manual.pdf'} target="_blank">Ayuda</Link>
+                                </Button>
+                            </Tooltip>
                         </Grid>
                         <Grid item xs={3.5} />
                         <Grid item xs={2}>
-                            <Button variant="contained" onClick={() => {
-                                dispatch(loginActions.logout())
-                            }}>Salir</Button>
+                            <Tooltip title="salir" arrow>
+                                <Button variant="contained" onClick={() => {
+                                    dispatch(loginActions.logout())
+                                }}>Salir</Button>
+                            </Tooltip>
                         </Grid>
                     </Grid>
                 </Toolbar>

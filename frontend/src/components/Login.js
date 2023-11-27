@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Container, Grid, Paper, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Button, Container, Grid, Paper, TextField, Tooltip, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -57,10 +57,12 @@ export default function Login() {
                                 onChange={(event) => setText({...text, password: event.target.value})}>
                             </TextField>
                             <br/>
-                            <Button variant='contained'
-                                    style={{marginTop: 10}}
-                                    onClick={acceder}
-                            >Acceder</Button>
+                            <Tooltip title="acceder" arrow>
+                                <Button variant='contained'
+                                        style={{marginTop: 10}}
+                                        onClick={acceder}
+                                >Acceder</Button>
+                            </Tooltip>
                         </Box>
                     </Paper>
                 </Grid>
