@@ -1,4 +1,4 @@
-import { Button, Grid, Paper, TextField, Box } from "@mui/material";
+import { Button, Grid, Paper, TextField, Box, Tooltip } from "@mui/material";
 import { useState } from "react";
 
 export default function Formulario(props) {
@@ -28,22 +28,24 @@ export default function Formulario(props) {
                         <TextField type="precio" value={data.precio} placeholder="precio" onChange={(event) => setData({...data, precio: event.target.value})}></TextField>
                     </Grid>
                     <Grid>
-                        <Button variant="contained" type="submit" style={{marginTop: 20}} onClick={() => {
-                            fetch(`http://localhost:3030/insert?nombre=${data.nombre}&marca=${data.marca}&tipo=${data.tipo}&precio=${data.precio}`)
-                                .then(res => res.json())
-                                .then(json => {
-                                    if(json.result.affectedRows===1){
-                                        alert('datos guardado')
-                                    }
+                        <Tooltip title="insertar">
+                            <Button variant="contained" type="submit" style={{marginTop: 20}} onClick={() => {
+                                fetch(`http://localhost:3030/insert?nombre=${data.nombre}&marca=${data.marca}&tipo=${data.tipo}&precio=${data.precio}`)
+                                    .then(res => res.json())
+                                    .then(json => {
+                                        if(json.result.affectedRows===1){
+                                            alert('datos guardado')
+                                        }
+                                    })
+                                props.event()
+                                setData({
+                                    nombre: "",
+                                    marca: "",
+                                    tipo: "",
+                                    precio: ""
                                 })
-                            props.event()
-                            setData({
-                                nombre: "",
-                                marca: "",
-                                tipo: "",
-                                precio: ""
-                            })
-                        }}>Insertar</Button>
+                            }}>Insertar</Button>
+                        </Tooltip>
                     </Grid>
                 </Grid>
             </Box>

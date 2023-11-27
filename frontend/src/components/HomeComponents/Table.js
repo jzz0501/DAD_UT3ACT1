@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Tooltip } from "@mui/material";
 import DeleteIcon from '@mui/icons-material//Delete';
 
 export default function Tabla(props) {
@@ -27,10 +27,16 @@ export default function Tabla(props) {
                                 <TableRow component="tr" key={row.id}>
                                     {   
                                         props.userRol==="admin"&&
-                                        <TableCell component="td"><Button onClick={() => {
-                                            fetch(`http://localhost:3030/delete?id=${row.id}`)
-                                            props.updateEvent()
-                                        }} variant="contained"><DeleteIcon/></Button></TableCell>
+                                        <TableCell component="td">
+                                            <Button onClick={() => {
+                                                fetch(`http://localhost:3030/delete?id=${row.id}`)
+                                                props.updateEvent()
+                                            }} variant="contained">
+                                                <Tooltip title="eliminar">
+                                                    <DeleteIcon/>
+                                                </Tooltip>
+                                            </Button>
+                                        </TableCell>
                                     }
                                     <TableCell component="td">{row.nombre}</TableCell>
                                     <TableCell component="td">{row.marca}</TableCell>
