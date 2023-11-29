@@ -26,7 +26,7 @@ export default function Navbar(props) {
                         </Grid>
                         <Grid item xs={2}>
                             <Tooltip title="inicio" arrow>
-                                <Button>Inicio</Button>
+                                <Button onClick={() => navigate('/home')}>Inicio</Button>
                             </Tooltip>
                         </Grid>
                         {
