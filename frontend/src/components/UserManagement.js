@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react";
-import Formulario from "./HomeComponents/Formulario";
 import Navbar from "./HomeComponents/Navbar";
-import Tabla from "./HomeComponents/Table";
-import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux";
+import Formulario from "./UMComponents/Formulario";
+import { useState } from "react";
+import { useEffect } from "react";
+import Tabla from "./UMComponents/Table";
+import { useNavigate } from "react-router-dom";
 
-export default function Home() {
-    
+export default function UserManagement() {
+
     const [list, setList] = useState([])
     const [control, setControl] = useState(0)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const initList = []
-        fetch(`http://localhost:3030/data`)
+        fetch(`http://localhost:3030/userData`)
             .then(res => res.json())
             .then(json => {
+                console.log(json)
                 json.rows.forEach(element => {
                     initList.push(element)
                 })
@@ -22,10 +25,11 @@ export default function Home() {
             })
     },[control])
 
+    const update = () => {
+        setControl(control+1)
+    }
     
-    //Utilizar hook useSelector para obtener datos de store (datos de estado actual)
     const userData = useSelector(state => state.login)
-    const navigate = useNavigate()
 
     const isLoggedin = userData.isAutenticated
     useEffect(() => {
@@ -34,15 +38,11 @@ export default function Home() {
         }
     }, [isLoggedin, navigate])
 
-    const update = () => {
-        setControl(control+1)
-    }
-
     return (
         <div>
             <Navbar username={userData.username} userRol={userData.userRol}/>
-            <Formulario event={update} userRol={userData.userRol}/>
-            <Tabla list={list} updateEvent={update} userRol={userData.userRol}/>
+            <Formulario event={update} userRol={userData.userRol}></Formulario>
+            <Tabla list={list} updateEvent={update} userRol={userData.userRol}></Tabla>
         </div>
     )
 }

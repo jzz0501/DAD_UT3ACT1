@@ -7,6 +7,7 @@ export default function InformesColeccion(props) {
             <MaterialTable
                 data={props.data}
                 columns={props.columns}
+                title={props.informesTitle}
                 options={{
                     filtering: true,
                     columnsButton: true,
@@ -21,6 +22,7 @@ export default function InformesColeccion(props) {
                             exportFunc: (cols, datas) =>
                             ExportCsv(cols, datas, "myCsvFileName"),
                         },
+
                     ],
                 }}
                 renderSummaryRow={({column, data}) => 

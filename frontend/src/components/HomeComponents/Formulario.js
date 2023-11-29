@@ -27,26 +27,31 @@ export default function Formulario(props) {
                     <Grid item xs={3}>
                         <TextField type="precio" value={data.precio} placeholder="precio" onChange={(event) => setData({...data, precio: event.target.value})}></TextField>
                     </Grid>
-                    <Grid>
-                        <Tooltip title="insertar">
-                            <Button variant="contained" type="submit" style={{marginTop: 20}} onClick={() => {
-                                fetch(`http://localhost:3030/insert?nombre=${data.nombre}&marca=${data.marca}&tipo=${data.tipo}&precio=${data.precio}`)
-                                    .then(res => res.json())
-                                    .then(json => {
-                                        if(json.result.affectedRows===1){
-                                            alert('datos guardado')
-                                        }
+                    {   
+                        props.userRol==="invitado"? 
+                        null
+                        :
+                        <Grid>
+                            <Tooltip title="insertar">
+                                <Button variant="contained" type="submit" style={{marginTop: 20}} onClick={() => {
+                                    fetch(`http://localhost:3030/insert?nombre=${data.nombre}&marca=${data.marca}&tipo=${data.tipo}&precio=${data.precio}`)
+                                        .then(res => res.json())
+                                        .then(json => {
+                                            if(json.result.affectedRows===1){
+                                                alert('datos guardado')
+                                            }
+                                        })
+                                    props.event()
+                                    setData({
+                                        nombre: "",
+                                        marca: "",
+                                        tipo: "",
+                                        precio: ""
                                     })
-                                props.event()
-                                setData({
-                                    nombre: "",
-                                    marca: "",
-                                    tipo: "",
-                                    precio: ""
-                                })
-                            }}>Insertar</Button>
-                        </Tooltip>
-                    </Grid>
+                                }}>Insertar</Button>
+                            </Tooltip>
+                        </Grid>
+                    }
                 </Grid>
             </Box>
         </Paper>
